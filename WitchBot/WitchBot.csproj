@@ -131,6 +131,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Games\TwentyOne.cs" />
+    <Compile Include="Modules\InfoModule.cs" />
+    <Compile Include="Modules\TwentyOneModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
