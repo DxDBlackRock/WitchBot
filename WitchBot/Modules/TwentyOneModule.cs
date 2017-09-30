@@ -6,13 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WitchBot.Games;
+using WitchBot.Games.TwentyOneGame;
 
 namespace WitchBot.Modules
 {
     public class TwentyOneModule : ModuleBase
     {
-        [Command("TwentyOne-start"),Summary("TwentyOne start")]
-        public async Task Start()
+        [Command("TwentyOne-reg"),Summary("TwentyOne registation")]
+        public async Task Reg()
         {
             TwentyOne.GetInstance().isPlaying = true;
 
@@ -37,13 +38,45 @@ namespace WitchBot.Modules
         [Command("TwentyOne-join"), Summary("TwentyOne start")]
         public async Task Join()
         {
+            if (TwentyOne.GetInstance().isStarted)
+                return;
             if (!TwentyOne.GetInstance().isPlaying)
                 return;
-            if(!TwentyOne.GetInstance().users.Any(x => x.Id == Context.User.Id))
+            if(!TwentyOne.GetInstance().users.Any(x => x.user.Id == Context.User.Id))
             {
-                TwentyOne.GetInstance().users.Add(Context.User);
+                TwentyOne.GetInstance().users.Add( new Player(Context.User));
             }
-            
         }
+
+        [Command("TwentyOne-start")]
+        public async Task Start()
+        {
+            if (!TwentyOne.GetInstance().isPlaying)
+                return;
+
+            TwentyOne.GetInstance().Start();
+           await ReplyAsync(TwentyOne.GetInstance().currentUser.user.Username + " Vote !");
+        }
+
+        public async Task Next()
+        {
+            await ReplyAsync(TwentyOne.GetInstance().currentUser.user.Username + " Vote !");
+        }
+
+        [Command("vote-hold")]
+        public async Task Hold()
+        {
+            if (!TwentyOne.GetInstance().isPlaying)
+                return;
+            TwentyOne.GetInstance().Hold();
+           await ReplyAsync(TwentyOne.GetInstance().currentUser.user.Username + " Vote !");
+        }
+
+        [Command("vote-draw")]
+        public async Task Draw()
+        {
+            TwentyOne.GetInstance().Draw();
+        }
+
     }
 }

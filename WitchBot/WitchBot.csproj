@@ -131,7 +131,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Games\TwentyOne.cs" />
+    <Compile Include="Extensions\LinqExtensions.cs" />
+    <Compile Include="Games\TwentyOneGame\Player.cs" />
+    <Compile Include="Games\TwentyOneGame\TwentyOne.cs" />
     <Compile Include="Modules\InfoModule.cs" />
     <Compile Include="Modules\TwentyOneModule.cs" />
     <Compile Include="Program.cs" />
